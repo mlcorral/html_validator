@@ -25,7 +25,7 @@ class HtmlValidator:
 
     @staticmethod
     def validate_html(html_string):
-        return HTMLValidator(html_string).is_valid_html()
+        return HtmlValidator(html_string).is_valid_html()
 
 
 def _extract_tags(html):
