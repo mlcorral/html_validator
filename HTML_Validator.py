@@ -23,7 +23,10 @@ def validate_html(html):
         if tag.startswith("<") and not tag.startswith("</"):
             stack.append(tag)
         elif tag.startswith("</"):
-            if not stack or not tag.startswith("</" + stack[-1][1:]):
+            if not stack:
+                return False
+            opening_tag = "<" + tag[2:]
+            if opening_tag != stack[-1]:
                 return False
             stack.pop()
     return not stack
