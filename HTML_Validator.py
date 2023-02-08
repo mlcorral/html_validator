@@ -1,32 +1,38 @@
 #!/bin/python3:
 
 
-import re
+class HTML_Validator:
+    def _extract_tags(self, html):
+        tag_list = []
+        tag = ''
+        in_tag = False
 
+        for char in html:
+            if char == '<':
+                in_tag = True
+            elif char == '>':
+                if in_tag:
+                    tag_list.append(tag)
+                    tag = ''
+                    in_tag = False
+            elif in_tag:
+                tag += char
 
-class HtmlValidator:
-    def __init__(self, html_string):
-        self.html_string = html_string
-        self.stack = []
+        if tag:
+            raise ValueError('found < without matching >')
 
-    def is_valid_html(self):
-        tags = self._extract_tags(self.html_string)
-        for tag in tags:
-            if tag.startswith("<") and not tag.startswith("</"):
-                self.stack.append(tag)
-            elif tag.startswith("</"):
-                if not self.stack:
+        return tag_list
+
+    def validate_html(self, html):
+        tag_list = self._extract_tags(html)
+        stack = []
+        for tag in tag_list:
+            if tag[1] != '/':
+                stack.append(tag)
+            else:
+                if not stack:
                     return False
-                opening_tag = "<" + tag[2:]
-                if opening_tag != self.stack[-1]:
+                open_tag = stack.pop()
+                if open_tag[1:] != tag[2:]:
                     return False
-                self.stack.pop()
-        return not self.stack
-
-    @staticmethod
-    def validate_html(html_string):
-        return HtmlValidator(html_string).is_valid_html()
-
-
-def _extract_tags(html):
-    return re.findall(r"<.*?>", html)
+        return not stack
