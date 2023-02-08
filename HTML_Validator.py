@@ -10,11 +10,14 @@ def validate_html(html):
         if not tag.startswith("<") or not tag.endswith(">"):
             return False
         if tag[1] == '/':
-            if not tag_stack or tag_stack.pop() != tag[2:-1]:
+            if not tag_stack or tag_stack.pop() != tag[2:-1].split()[0]:
                 return False
         else:
-            if not tag.endswith("/>"):
-                tag_stack.append(tag[1:-1])
+            if tag.endswith("/>"):
+                continue
+            tag_name = tag[1:].split()[0].rstrip(">")
+            if not tag_name.endswith("/"):
+                tag_stack.append(tag_name)
     return not tag_stack
 
 def _extract_tags(html):
