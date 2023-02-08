@@ -1,5 +1,4 @@
 #!/bin/python3:
-#
 
 
 import re
@@ -26,7 +25,7 @@ class HtmlValidator:
 
     @staticmethod
     def validate_html(html_string):
-        return HTML_Validator(html_string).is_valid_html()
+        return HTMLValidator(html_string).is_valid_html()
 
 
 def _extract_tags(html):
