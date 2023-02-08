@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/bin/python3:
 
 import re
 
@@ -13,9 +13,9 @@ def validate_html(html):
             if not tag_stack or tag_stack.pop() != tag[2:-1]:
                 return False
         else:
-            tag_stack.append(tag[1:-1])
-
+            if not tag.endswith("/>"):
+                tag_stack.append(tag[1:-1])
     return not tag_stack
 
 def _extract_tags(html):
-    return re.findall(r'<\/?\w+>', html)
+    return re.findall(r'<\/?\w+[^<]*>', html)
