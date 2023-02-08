@@ -1,7 +1,8 @@
 #!/bin/python3:
 def validate_html(html):
     '''
-    This function returns True if every opening tag has a corresponding closing tag in the given html string, and False otherwise.
+    This function returns True if every opening tag has a corresponding closing tag in
+    the given html string, and False otherwise.
 
     >>> validate_html('<strong>Python</strong>')
     True
@@ -18,9 +19,11 @@ def validate_html(html):
             opening_tags.append(tag)
     return len(opening_tags) == len(closing_tags)
 
+
 def _extract_tags(html):
     '''
-    This function returns a list of all the html tags contained in the input string, stripping out all text not contained within angle brackets.
+    This function returns a list of all the html tags contained in the input string,
+    stripping out all text not contained within angle brackets.
 
     >>> _extract_tags('<strong>Python</strong>')
     ['<strong>', '</strong>']
