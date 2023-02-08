@@ -3,7 +3,7 @@
 import re
 
 
-class HTML_Validator:
+class HtmlValidator:
     def __init__(self, html_string):
         self.html_string = html_string
         self.stack = []
