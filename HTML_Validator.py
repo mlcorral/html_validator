@@ -1,7 +1,7 @@
 #!/bin/python3:
 
 
-def extract_tags(html):
+def _extract_tags(html):
     tag_list = []
     tag = ''
     in_tag = False
