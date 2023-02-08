@@ -1,7 +1,7 @@
 #!/bin/python3:
 
 
-class HTML_Validator:
+class HtmlValidator:
     def _extract_tags(self, html):
         tag_list = []
         tag = ''
