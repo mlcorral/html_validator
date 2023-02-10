@@ -1,16 +1,19 @@
 #!/bin/python3:
-
 import re
 
 def validate_html(html):
     """
     Validate the HTML string by checking if all the tags are properly nested and closed.
     """
+    if html == '':
+        return True
     tag_stack = [] # stack to store the opened tags
     tags = _extract_tags(html) # extract the tags from HTML string
     if not tags or not re.match(r'<\/?\w+[^<]*>', tags[0]):
         return False 
     for tag in tags:
+        if tag == '':
+            return False
         # if the tag doesn't start with "<" or doesn't end with ">", return False
         if not tag.startswith("<") or not tag.endswith(">"):
             return False
